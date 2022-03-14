@@ -52,9 +52,8 @@ def calculate(num=None):
                 price_index.append(temp1)
                 price_save.append(int(temp2))
 
-
-        first = pd.DataFrame({'product':price_index,'price':price_save})
-        last = pd.DataFrame({'product':[str(price_index)],'price':np.sum(price_save)})
+        first = pd.DataFrame({'product':price_index,'price':price_save,'count':np.repeat(1,len(price_index))})
+        last = pd.DataFrame({'product':[str(price_index)],'price':np.sum(price_save),'count':[len(price_index)]})
 
         first = pd.concat([first,last])
         for z in range(2,len(price_index)):
@@ -65,11 +64,11 @@ def calculate(num=None):
             temp1_fix = [list(i) for i in temp1]
             temp2_fix = [sum(i) for i in temp2]
 
-            temp = pd.DataFrame({'product':temp1_fix,'price':temp2_fix})
+            temp = pd.DataFrame({'product':temp1_fix,'price':temp2_fix,'count':np.repeat(z,len(temp1_fix))})
             first = pd.concat([first,temp])
 
         first['price2'] = [int(str(i)[len(str(i))-3:len(str(i))]) for i in first['price']]
-        first = first[first['price']>5000].sort_values('price2',ascending=False)
+        first = first[first['price']>5000].sort_values(by=['price2','price'], ascending=[False,True])
         result = str(first.iloc[0,0])+'를 계산하세요 '+str(first.iloc[0,1])+'원'
 
     else:
