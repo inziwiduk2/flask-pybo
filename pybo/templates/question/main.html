@@ -1,52 +1,129 @@
 <!DOCTYPE html>
 <html>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+
+    <style>
+
+        @font-face{
+                src: url("static/Cafe24Ssurround.ttf");
+                font-family: "cafe24"; 
+        }
+
+        .my_input {
+            
+              height: 40px;
+              width: 200px;
+
+              padding: 1px 1px 1px 1px; /* 상, 우, 좌, 하 */
+              margin-top: 10px;
+              text-align: left; /* left, center, right */
+              border: #888888 1px solid;
+              background-color: #FFFFFF;
+              /* 테두리 각각의 색상 및 두께를 지정할때 사용합니다
+              border-right: #888888 1px solid;
+              border-left: #888888 1px solid;
+              border-top: #888888 1px solid;
+              border-bottom: #888888 1px solid;
+              */
+    
+              /* 글꼴을 따로 지정할 수 있다.
+              font-family: 궁서, Gulim, 'Times New Roman';
+              */
+              color: #000000;
+              font-size: 20pt; 
+              font-weight: normal; /* normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900 */
+              font-style: normal; /* normal, italic, oblique */;
+
+              border-radius: 10px;
+              
+        }
+
+        .my_button{
+
+              border-right: #888888 0px solid;
+              border-left: #888888 0px solid;
+              border-top: #888888 0px solid;
+              border-bottom: #888888 0px solid;
+              font-family:cafe24;
+              font-size: 35pt; 
+              background-color:rgb(255, 238, 0);
+              border-radius: 10pt;
+              padding-top: 5pt;
+              width: 302pt;
+        }
+
+        .bgSizeCover {
+            
+            background-image: url("static/card.png");
+            background-size: "cotain";
+            background-repeat: no-repeat;
+            width: 700px;
+            height: 1120px;
+            /* border: 2px solid; */
+            color: rgb(14, 14, 14);
+            resize: both;
+            overflow: scroll;
+            padding-top: 100px;
+            padding-left: 40px;
+        }
+    </style>
+
 <head>
     <title>
-        Flask #2
+        The More Card Calculator
     </title>
 </head>
-<body>
+<!-- <body style="padding-left: 15px;"> -->
+<body class="bgSizeCover"></body>
+
     <form method="POST" action="/calculate">
-        <h1> 상품명, 가격</br></h1>
-        <input type="text" name="t1" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n1" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t2" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n2" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t3" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n3" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t4" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n4" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t5" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n5" style="width:200px;height:40px;font-size:30px;"><br>
+        <h1 style="font-family: cafe24; color: #FFFFFF;margin-left: 47px; float:left;"> 상품명 </h1>
+        <h1 style="font-family: cafe24; color: #FFFFFF;margin-left: 115px;margin-right: 300px; float:left;"> 가격 </h1><br>
 
-        <input type="text" name="t6" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n6" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t7" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n7" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t8" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n8" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t9" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n9" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t10" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n10" style="width:200px;height:40px;font-size:30px;"><br>
+        <input type="text" name="t1" class="my_input">
+        <input type="number" name="n1" class="my_input"><br>
+        
+        <input type="text" name="t2" class="my_input">
+        <input type="number" name="n2" class="my_input"><br>
+        <input type="text" name="t3" class="my_input">
+        <input type="number" name="n3" class="my_input"><br>
+        <input type="text" name="t4" class="my_input">
+        <input type="number" name="n4" class="my_input"><br>
+        <input type="text" name="t5" class="my_input">
+        <input type="number" name="n5" class="my_input"><br>
 
-        <input type="text" name="t11" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n11" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t12" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n12" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t13" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n13" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t14" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n14" style="width:200px;height:40px;font-size:30px;"><br>
-        <input type="text" name="t15" style="width:200px;height:40px;font-size:30px;">
-        <input type="number" name="n15" style="width:200px;height:40px;font-size:30px;"><br>
+        <input type="text" name="t6" class="my_input">
+        <input type="number" name="n6" class="my_input"><br>
+        <input type="text" name="t7" class="my_input">
+        <input type="number" name="n7" class="my_input"><br>
+        <input type="text" name="t8" class="my_input">
+        <input type="number" name="n8" class="my_input"><br>
+        <input type="text" name="t9" class="my_input">
+        <input type="number" name="n9" class="my_input"><br>
+        <input type="text" name="t10" class="my_input">
+        <input type="number" name="n10" class="my_input"><br>
+
+        <input type="text" name="t11" class="my_input">
+        <input type="number" name="n11" class="my_input"><br>
+        <input type="text" name="t12" class="my_input">
+        <input type="number" name="n12" class="my_input"><br>
+        <input type="text" name="t13" class="my_input">
+        <input type="number" name="n13" class="my_input"><br>
+        <input type="text" name="t14" class="my_input">
+        <input type="number" name="n14" class="my_input"><br>
+        <input type="text" name="t15" class="my_input">
+        <input type="number" name="n15" class="my_input"><br>
 
         <br>
-        <button type="submit" style="width:200px;height:40px;font-size:30px;">계산하기</button>
+        <button type="image" class="my_button">계산하기</button>
+        <!-- <img src="static/card.png" alt="" style="height: 60px; width: 100px;"> -->
     </form>
     <div>
         <p>
-            <h1>{{num}}</h1>
+            <h1 style="color:#FFFFFF;">{{num}}</h1>
         </p>
     </div>
 </body>

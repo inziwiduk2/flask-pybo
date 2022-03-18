@@ -28,6 +28,7 @@ from flask import Flask, render_template, redirect, request, url_for
 import numpy as np
 import pandas as pd
 import itertools
+
 app = Flask(__name__)
  
 @app.route('/')
@@ -70,10 +71,11 @@ def calculate(num=None):
         first['price2'] = [int(str(i)[len(str(i))-3:len(str(i))]) for i in first['price']]
         first = first[first['price']>5000].sort_values(by=['price2','price'], ascending=[False,True])
         result = str(first.iloc[0,0])+'를 계산하세요 '+str(first.iloc[0,1])+'원'
+        # str(request.user_agent.string.replace('/',''))
 
     else:
 
-        None
+        result = ''
 
     return redirect(url_for('inputTest',num=result))
 
