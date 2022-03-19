@@ -53,7 +53,7 @@ def calculate(num=''):
                 price_index.append(temp1)
                 price_save.append(int(temp2))
 
-        if(len(price_index)!=0):
+        if(len(price_index)!=0 & np.sum(price_save)>=5000):
 
             first = pd.DataFrame({'product':price_index,'price':price_save,'count':np.repeat(1,len(price_index))})
             last = pd.DataFrame({'product':[str(price_index)],'price':np.sum(price_save),'count':[len(price_index)]})
@@ -77,6 +77,10 @@ def calculate(num=''):
             
             result = product+'를 계산하세요 '+str(first.iloc[0,1])+'원'
             # str(request.user_agent.string.replace('/',''))
+
+        elif(len(price_index)!=0 & np.sum(price_save)<5000):
+
+            result = '가격이 5000원을 넘지 않습니다.'
 
         else:
 
