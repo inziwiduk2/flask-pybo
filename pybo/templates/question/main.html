@@ -17,9 +17,10 @@
               height: 40px;
               width: 189px;
 
-              padding: 1px 1px 1px 1px; /* 상, 우, 좌, 하 */
+              /* 상, 우, 좌, 하 */
+              /* padding: 1px 1px 1px 1px; */
               margin-top: 10px;
-              text-align: left; /* left, center, right */
+              text-align: center; /* left, center, right */
               border: #888888 1px solid;
               background-color: #FFFFFF;
               /* 테두리 각각의 색상 및 두께를 지정할때 사용합니다
@@ -33,7 +34,7 @@
               font-family: 궁서, Gulim, 'Times New Roman';
               */
               color: #000000;
-              font-size: 20pt; 
+              font-size: 22pt; 
               font-weight: normal; /* normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900 */
               font-style: normal; /* normal, italic, oblique */;
 
@@ -53,6 +54,7 @@
               border-radius: 10pt;
               padding-top: 5pt;
               width: 282pt;
+              
         }
 
         .bgSizeCover {
@@ -81,7 +83,7 @@
 
     <form method="POST" action="/calculate">
         <h1 style="font-family: cafe24; color: #FFFFFF;margin-left: 25px; float:left;"> [상품명] </h1>
-        <h1 style="font-family: cafe24; color: #FFFFFF;margin-left: 73px;margin-right: 200px; float:left;"> [가격] </h1><br>
+        <h1 style="font-family: cafe24; color: #FFFFFF;margin-left: 75px;margin-right: 200px; float:left;"> [가격] </h1><br>
 
         <input type="text" name="t1" class="my_input">
         <input type="number" name="n1" class="my_input"><br>
@@ -123,7 +125,7 @@
     </form>
     <div>
         <p>
-            <h1 style="color:#FFFFFF;">{{num}}</h1>
+            <h2 style="color:#ffffff;font-family: cafe24;">{{num}}</h2>
         </p>
     </div>
 </body>

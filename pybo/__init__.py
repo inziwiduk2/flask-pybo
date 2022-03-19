@@ -33,11 +33,11 @@ app = Flask(__name__)
  
 @app.route('/')
 @app.route('/<num>')
-def inputTest(num=None):
+def inputTest(num=''):
     return render_template('question/main.html', num=num)
     
 @app.route('/calculate',methods=['POST'])
-def calculate(num=None):
+def calculate(num=''):
     if request.method == 'POST':
         
         price_index = []
@@ -53,25 +53,34 @@ def calculate(num=None):
                 price_index.append(temp1)
                 price_save.append(int(temp2))
 
-        first = pd.DataFrame({'product':price_index,'price':price_save,'count':np.repeat(1,len(price_index))})
-        last = pd.DataFrame({'product':[str(price_index)],'price':np.sum(price_save),'count':[len(price_index)]})
+        if(len(price_index)!=0):
 
-        first = pd.concat([first,last])
-        for z in range(2,len(price_index)):
+            first = pd.DataFrame({'product':price_index,'price':price_save,'count':np.repeat(1,len(price_index))})
+            last = pd.DataFrame({'product':[str(price_index)],'price':np.sum(price_save),'count':[len(price_index)]})
+
+            first = pd.concat([first,last])
+            for z in range(2,len(price_index)):
+                
+                temp1 = list(itertools.combinations((price_index),z))
+                temp2 = list(itertools.combinations((price_save),z))
+
+                temp1_fix = [list(i) for i in temp1]
+                temp2_fix = [sum(i) for i in temp2]
+
+                temp = pd.DataFrame({'product':temp1_fix,'price':temp2_fix,'count':np.repeat(z,len(temp1_fix))})
+                first = pd.concat([first,temp])
+
+            first['price2'] = [int(str(i)[len(str(i))-3:len(str(i))]) for i in first['price']]
+            first = first[first['price']>5000].sort_values(by=['price2','price'], ascending=[False,True])
             
-            temp1 = list(itertools.combinations((price_index),z))
-            temp2 = list(itertools.combinations((price_save),z))
+            product = str(first.iloc[0,0]).replace('[','').replace(']','').replace("'","")
+            
+            result = product+'를 계산하세요 '+str(first.iloc[0,1])+'원'
+            # str(request.user_agent.string.replace('/',''))
 
-            temp1_fix = [list(i) for i in temp1]
-            temp2_fix = [sum(i) for i in temp2]
+        else:
 
-            temp = pd.DataFrame({'product':temp1_fix,'price':temp2_fix,'count':np.repeat(z,len(temp1_fix))})
-            first = pd.concat([first,temp])
-
-        first['price2'] = [int(str(i)[len(str(i))-3:len(str(i))]) for i in first['price']]
-        first = first[first['price']>5000].sort_values(by=['price2','price'], ascending=[False,True])
-        result = str(first.iloc[0,0])+'를 계산하세요 '+str(first.iloc[0,1])+'원'
-        # str(request.user_agent.string.replace('/',''))
+            result = '가격이 하나도 입력되지 않았습니다.'
 
     else:
 
