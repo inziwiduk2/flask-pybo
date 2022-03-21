@@ -82,8 +82,10 @@
 <body class="bgSizeCover"></body>
 
     <form method="POST" action="/calculate">
+
         <h1 style="font-family: cafe24; color: #FFFFFF;margin-left: 25px; float:left;"> [상품명] </h1>
-        <h1 style="font-family: cafe24; color: #FFFFFF;margin-left: 75px;margin-right: 200px; float:left;"> [가격] </h1><br>
+        <h1 style="font-family: cafe24; color: #FFFFFF;margin-left: 75px;margin-right: 120px; float:left;"> [가격] </h1>
+        <h1 style="font-family: cafe24; float:left;"><a href="{{ url_for('logout')}}" style="color: rgb(0, 255, 64)">로그아웃</a></h1><br>
 
         <p style="line-height : 30pt;">
         <input type="text" name="t1" class="my_input">
@@ -168,5 +170,6 @@
             <h2 style="color:#ffffff;font-family: cafe24;">{{num}}</h2>
         </p>
     </div>
+
 </body>
 </html>
