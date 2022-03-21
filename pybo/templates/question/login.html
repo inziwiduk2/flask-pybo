@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+    <style>
+
+        @font-face{
+             src: url("static/Cafe24Ssurround.ttf");
+             font-family: "cafe24"; 
+        }
+        
+    </style>
+
+    <head>
+        <meta charset='utf-8'/>
+        <meta name='viewport' content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+     </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+     </script>
+    </head>
+
+<body>
+  
+    <div class="container" style="display: flex;justify-content: center;align-items: center;font-family: cafe24;">
+
+        <form method="POST" >   
+            {{form.csrf_token}}
+
+            <div class="row mt-5" style="font-size:28pt; margin-bottom: 10pt;">
+                더모아카드 계산기 로그인
+            </div>
+
+            <div class="form-group" style="font-size:22pt; margin-bottom: 10pt;">
+                
+                <!-- {{form.username.label("아이디")}} -->
+                {{form.username(class="form-control",style="width:400px;height:50px;font-size:16pt;" , placeholder="아이디")}}
+            </div>
+            
+            <div class="form-group" style="font-size:22pt; margin-bottom: 10pt;">
+            
+                <!-- {{form.password.label("비밀번호")}} -->
+                {%if form.password.errors%}  
+                <!-- 로그인 실패시 errors/ password필드의 모든 에러를 갖고있다. -->
+                {{form.password.errors.0}}
+                <!--0 : 첫번째 에러메시지를 출력 하겠다 라는 뜻  -->
+                {%endif%}
+                {{form.password(class="form-control",style="width:400px;height:50px;font-size:16pt;", placeholder="비밀번호")}}
+                
+            </div>
+            
+            <div>
+                <button type="submit" class="btn btn-primary" style="width:400px; height:50px; margin-bottom: 10pt;font-size:16pt;">로그인</button>
+            </div>
+            
+            <div class="form-group" style="font-size:22px;">
+                <a href="{{ url_for('signup') }}">계정생성</a>
+            </div>
+
+        </form>
+
+    </div>
+</body>
+</html>
