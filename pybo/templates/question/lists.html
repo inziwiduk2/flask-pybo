@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Authorize</title>
+</head>  
+
+<body>
+
+    <form method="post" action="/authorize/">
+        <div style="display: flex;">
+            <input type="text" name="num" style="width:100px;height:20px;margin-left:40px;">&nbsp;
+            <button type="submit" style="width:100px;height:26px;">승인</button>
+        </div>
+        <ul>
+            {% for i in lists %}
+            <li>{{i[0]}} {{i[1]}} {{i[3]}} {{i[4]}}
+
+                <!-- {% if i[4]=='O' %}
+                <button type="submit" id="{{i[0]}}">승인O</button>
+                {%else%}
+                <button type="submit" id="{{i[0]}}">승인X</button>
+                {%endif%} -->
+
+            </li>
+            {%endfor%}
+        </ul>
+    </form>
+
+</body>
+
+</html>
