@@ -1,3 +1,5 @@
+from ast import If
+import sqlite3
 from flask import Flask, render_template, redirect, request, url_for, flash, session
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -35,6 +37,8 @@ from .models import User
 
 #     return app
 
+
+
 app = Flask(__name__)
 app.secret_key = b'ermdlfie20391!@$/'
 app.config.from_object(config)
@@ -52,12 +56,12 @@ def login():
         error = None
         user = User.query.filter_by(username=form.username.data).first()
         if not user:
-            error = "존재하지 않는 사용자입니다."
+            error = "존재하지 않는 사용자입니다. ID를 확인해주세요."
         elif not check_password_hash(user.password, form.password.data):
             error = "비밀번호가 올바르지 않습니다."
         else:
             if user.approve == 'X':
-                error = "승인되지 않았습니다."
+                error = "관리자로부터 승인되지 않은 사용자입니다."
 
         if error is None:
             # session.clear()
@@ -130,11 +134,11 @@ def calculate():
 
             elif((len(price_save)!=0) & (np.sum(price_save)<5000)):
 
-                result = '가격이 5000원을 넘지 않습니다.'
+                result = '총 이용금액이 5,000원을 넘지 않습니다.'
 
             else:
 
-                result = '가격이 하나도 입력되지 않았습니다.'
+                result = '상품명, 가격을 입력해주세요.'
 
         else:
 
@@ -174,6 +178,45 @@ def signup():
     return render_template('question/signup.html', form=form)
 
 
+from pybo.models import User
+from pybo import db
 
+@app.route('/authorize/', methods=('GET', 'POST'))
+def select(num=None):
+
+    if(session['user'] == 1):
+
+        if (request.method == 'POST'):
+
+            if(request.form['num']!=''):
+
+                a = User.query.get_or_404(request.form['num'])
+
+                if(a.approve == 'O'):
+
+                    a.approve = 'X'
+
+                else:
+
+                    a.approve = 'O'
+
+                db.session.commit()
+
+        else:
+
+            None
+
+        conn = sqlite3.connect('pybo.db')
+        cursor = conn.cursor()
+        sql = 'SELECT * FROM User'
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        conn.close()
+
+        return render_template('question/lists.html',lists=rows)
+
+    else:
+
+        return redirect(url_for('login'))
 
 
